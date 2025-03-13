@@ -60,8 +60,8 @@ define('AUTOLOAD_DIRECTORIES',  [
  * APLICACIÓN
  * -------------------------------------------------------------*/
 
-define('APP_NAME', 'FastLight Framework');   // Título de la aplicación.
-define('APP_TYPE', 'WEB');                   // Tipo de aplicación: WEB o API.
+define('APP_NAME', 'ApiBiblioteca');   // Título de la aplicación.
+define('APP_TYPE', 'API');                   // Tipo de aplicación: WEB o API.
 
 define('APP_VERSION', '1.8.6');  // versión actual del framework o aplicación desarrollada
 define('SHOW_VERSION', true);     // muestra la versión de la app en el footer (templates/Base.php)
@@ -74,7 +74,7 @@ define('DEFAULT_METHOD', 'index');
 // Email del administrador, para la operación de "contacto".
 // Esta operación no está implementada de serie en FastLight,
 // la implementamos en clase.
-define('ADMIN_EMAIL', 'robert@fastlight.org');
+define('ADMIN_EMAIL', 'jz_blo@hotmail.com');
 
 // ¿Deben las cadenas vacías ser convertidas a NULL? 
 // se aplica al recuperar los datos de la petición mediante el objeto Request,
@@ -110,7 +110,7 @@ define('RESPONSE_CHARSET', 'utf-8'); // charset para las respuestas HTTP
 define('DB_HOST','localhost');  // Host.
 define('DB_USER','root');       // Usuario.
 define('DB_PASS','');           // Password.
-define('DB_NAME','fastlight');  // Nombre de la base de datos.
+define('DB_NAME','biblioteca');  // Nombre de la base de datos.
 define('DB_PORT',  3306);       // Puerto.
 define('DB_CHARSET','utf8');    // Codificación de caracteres.
 
@@ -306,8 +306,8 @@ define('STATS_ROLES', ['ROLE_ADMIN', 'ROLE_TEST']);
  * -------------------------------------------------------------*/
 
 // Cabeceras CORS:
-define('ALLOW_ORIGIN', 'http://localhost');          // Orígenes aceptados para peticiones.
-define('ALLOW_METHODS', 'POST, GET, PUT, DELETE');   // Métodos aceptados para peticiones.
+define('ALLOW_ORIGIN', '*');          // Orígenes aceptados para peticiones.
+define('ALLOW_METHODS', 'POST, GET, PUT, DELETE, OPTIONS');   // Métodos aceptados para peticiones.
 define('ALLOW_HEADERS', 'csrf_token');               // Encabezados permitidos.
 define('ALLOW_CREDENTIALS', 'true');                 // ¿Se permite el envío de credenciales?
 
