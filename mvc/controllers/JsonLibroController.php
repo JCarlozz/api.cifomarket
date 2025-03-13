@@ -3,21 +3,21 @@ class JsonLibroController extends Controller{
     
     public function get(
         mixed $param1 = NULL,
-        mixed $param2 = NULL
+        mixed $param2 =NULL
         ):JsonResponse {
         
             if(!$param1 && !$param2)
                 $libros = Libro::all();
             
-            if ($param1 && !$param2)
-                $libros = Libro::getFiltered($param1, $param2);
+            if ($param1 && $param2)
+                $libros =Libro::getFiltered($param1, $param2);
             
             if ($param1 && !$param2)
                 $libros = [
                     Libro::findOrFail(intval($param1), "No se encontró el libro")
                 ];
                 
-            return JsonResponse(
+            return new JsonResponse(
                 $libros,
                 "Se han recuperado ".sizeof($libros)." resultados" 
                 
@@ -112,12 +112,3 @@ class JsonLibroController extends Controller{
         }
     
 }
-
-
-
-
-
-
-
-
-
