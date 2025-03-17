@@ -60,10 +60,10 @@ define('AUTOLOAD_DIRECTORIES',  [
  * APLICACIÓN
  * -------------------------------------------------------------*/
 
-define('APP_NAME', 'ApiBiblioteca');   // Título de la aplicación.
+define('APP_NAME', 'ApiCifomarket');   // Título de la aplicación.
 define('APP_TYPE', 'API');                   // Tipo de aplicación: WEB o API.
 
-define('APP_VERSION', '1.8.6');  // versión actual del framework o aplicación desarrollada
+define('APP_VERSION', '1.8.7');  // versión actual del framework o aplicación desarrollada
 define('SHOW_VERSION', true);     // muestra la versión de la app en el footer (templates/Base.php)
 
 
@@ -110,11 +110,11 @@ define('RESPONSE_CHARSET', 'utf-8'); // charset para las respuestas HTTP
 define('DB_HOST','localhost');  // Host.
 define('DB_USER','root');       // Usuario.
 define('DB_PASS','');           // Password.
-define('DB_NAME','biblioteca');  // Nombre de la base de datos.
+define('DB_NAME','cifomarket');  // Nombre de la base de datos.
 define('DB_PORT',  3306);       // Puerto.
 define('DB_CHARSET','utf8');    // Codificación de caracteres.
 
-define('DB_CLASS','DBPDO');     // Clase a usar, puede ser DBMysqli (mysqli) o DBPDO (PDO).
+define('DB_CLASS','DBMysqli');     // Clase a usar, puede ser DBMysqli (mysqli) o DBPDO (PDO).
 define('SGDB','mysql');         // Driver que debe usar PDO (solamente para PDO).
 
 
@@ -150,9 +150,11 @@ define('BLOCKED_REDIRECT', '/');
 
 // carpeta para las imágenes de los usuarios
 define('USER_IMAGE_FOLDER','/images/users');
+define('PRO_IMAGE_FOLDER','/images/pro');
 
 // imagen por defecto para los usuarios que no tengan
 define('DEFAULT_USER_IMAGE', 'default.png');
+define('DEFAULT_PRO_IMAGE','default.png');
 
 
 
@@ -174,7 +176,7 @@ define('DB_LOGIN_ERRORS', false);                  // Guardar errores de login e
  * -------------------------------------------------------------*/
 
 // nombre de la sesión (y de la cookie de sesión)
-define('SESSION_NAME', 'FASTLIGHTSESSID');   
+define('SESSION_NAME', 'CM2025');   
 
 // tiempo (en segundos) antes de marcar los datos de sesión como basura
 define('SESSION_TIME', 1440);           
@@ -305,13 +307,20 @@ define('STATS_ROLES', ['ROLE_ADMIN', 'ROLE_TEST']);
  * API
  * -------------------------------------------------------------*/
 
-// Cabeceras CORS:
-define('ALLOW_ORIGIN', '*');          // Orígenes aceptados para peticiones.
-define('ALLOW_METHODS', 'POST, GET, PUT, DELETE, OPTIONS');   // Métodos aceptados para peticiones.
-define('ALLOW_HEADERS', 'csrf_token');               // Encabezados permitidos.
-define('ALLOW_CREDENTIALS', 'true');                 // ¿Se permite el envío de credenciales?
+// CABECERAS CORS:
+// Orígenes aceptados para peticiones.
+define('ALLOW_ORIGIN', 'http://localhost');
 
-define('API_AUTHENTICATION', 'COOKIE'); // puede ser COOKIE (implementado) o KEY (no implementado aún)
+// Métodos HTTP aceptados.
+define('ALLOW_METHODS', 'POST, GET, PUT, DELETE, OPTIONS');
 
-    
-    
+// Cabeceras permitidas
+define('ALLOW_HEADERS', 'csrf_token');
+
+// ¿Se permite el envío de credenciales?
+define('ALLOW_CREDENTIALS', 'true');
+
+// Método de autenticación para las peticiones a la API.
+// Puede ser COOKIE (implementado) o KEY (no implementado aún)
+define('API_AUTHENTICATION', 'COOKIE'); 
+

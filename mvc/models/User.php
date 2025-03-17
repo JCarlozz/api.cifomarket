@@ -6,18 +6,59 @@
  *
  * @author Robert Sallent <robertsallent@gmail.com>
  * 
- * Última revisión: 03/02/2025
+ * Última revisión: 05/03/2025
  */
 
 class User extends Model implements Authenticable{
 
     use Authorizable; // usa el trait authorizable
     
+    public function getProductos():array{
+        $consulta = "SELECT * FROM productos WHERE iduser=$this->id";
+        
+        //retorna una lista de Ejemplar
+        return DBMysqli::selectAll($consulta, 'Producto');
+    }
+    
+    public function validate(bool $checkId = false):array{
+        $errores = [];
+        
+        //título de 1 al 120 caracteres
+        //if (empty($this->nombreyapellidos) || strlen($this->nombreyapellidos) < 1 || strlen($this->nombreyapellidos) > 120)
+               // $errores['nombreyapellidos'] = "Error en la longitud del nombre";
+                
+        //edad recomendada de 0 a 120
+        if (empty($this->email) || !preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $this->email))
+                $errores['email'] = "Error en la email";
+                        
+        //título de 1 al 25 caracteres
+        if (empty($this->direccion) || strlen($this->direccion) < 1 || strlen($this->direccion) > 60)
+                $errores['direccion'] = "Error en la dirección";
+                            
+        //Población
+        if (empty($this->poblacion) || !preg_match("/^[A-ZÁÉÍÓÚÑa-záéíóúñ]+(?:[\s-][A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/", $this->poblacion))
+                $errores['poblacion'] = "Error en la población";
+                                    
+        //Provincia
+        if (empty($this->provincia) || !preg_match("/^[A-ZÁÉÍÓÚÑa-záéíóúñ]+(?:[\s-][A-ZÁÉÍÓÚÑa-záéíóúñ]+)*$/", $this->provincia))
+                $errores['provincia'] = "Error en la provincia";
+                                        
+        //Teléfono
+        //if (empty($this->phone) || !preg_match("/^(\+34\s?|0034\s?|34\s?)?[6789]\d{8}$/", $this->phone))
+                //$errores['phone'] = "Error en el número de teléfono";
+                                            
+        return $errores;     //retorna la lista de errores
+    }
+       
+    
     /** @var array $jsonFields lista de campos JSON que deben convertirse en array PHP. */
     protected static $jsonFields = ['roles'];
     
     
+    /** @var array $fillable lista de campos permitidos para asignaciones masivas usando el método create() */
+    protected static $fillable = ['displayname', 'email', 'phone', 'password', 'picture'];
 
+    
     /**
      * Retorna un usuario a partir de un teléfono y un email. Lo usaremos
      * en la opción "olvidé mi password".
@@ -65,8 +106,7 @@ class User extends Model implements Authenticable{
         // preparación de la consulta
         $consulta="SELECT *  FROM users
                    WHERE (email='$emailOrPhone' OR phone='$emailOrPhone') 
-                   AND password='$password'
-                   AND blocked_at IS NULL";
+                   AND password='$password'";
         
         $usuario = (DB_CLASS)::select($consulta, self::class);
         
