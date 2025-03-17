@@ -22,11 +22,8 @@ class User extends Model implements Authenticable{
     
     public function validate(bool $checkId = false):array{
         $errores = [];
-        
-        //título de 1 al 120 caracteres
-        //if (empty($this->nombreyapellidos) || strlen($this->nombreyapellidos) < 1 || strlen($this->nombreyapellidos) > 120)
-               // $errores['nombreyapellidos'] = "Error en la longitud del nombre";
-                
+       
+              
         //edad recomendada de 0 a 120
         if (empty($this->email) || !preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/", $this->email))
                 $errores['email'] = "Error en la email";
